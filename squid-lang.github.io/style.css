@@ -24,6 +24,10 @@
 body {
   font-family: 'Vollkorn', 'Times New Roman', Times, serif;
   font-size: 18px;
+  letter-spacing: 0.05em;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  font-synthesis: none;
   margin: 0;
 }
 
