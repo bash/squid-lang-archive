@@ -1,10 +1,28 @@
+@font-face {
+  font-family: 'Vollkorn';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Vollkorn Regular'),
+       local('Vollkorn-Regular'),
+       url(/fonts/Vollkorn-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Vollkorn';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Vollkorn Bold'),
+       local('Vollkorn-Bold'),
+       url(/fonts/Vollkorn-Bold.woff2) format('woff2');
+}
+
 :root {
   --brand-purple: #8E24AA;
   --link-color: var(--brand-purple);
 }
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Vollkorn', 'Times New Roman', Times, serif;
   font-size: 18px;
   margin: 0;
 }
@@ -36,7 +54,6 @@ body {
 .landing-links > .list > .item > .link {
   color: var(--link-color);
   text-decoration: none;
-  font-weight: bold;
   transition: opacity .2s;
 }
 
@@ -45,7 +62,7 @@ body {
 }
 
 .inline-link {
-  font-weight: 500;
+  font-weight: 700;
   text-decoration: none;
   color: inherit;
 }
