@@ -1,0 +1,31 @@
+dist: trusty
+sudo: false
+
+language: rust
+cache: cargo
+
+notifications:
+  email: false
+
+before_script:
+- |
+    mkdir abnf-download &&
+    cd ./abnf-download &&
+    wget -O abnf.tar.gz https://rschmidmeister.nyc3.digitaloceanspaces.com/binaries/abnf/abnf-x86_64-gnu-linux.tar.gz &&
+    tar -xvf abnf.tar.gz &&
+    sudo cp ./abnf /usr/local/bin/ &&
+    cd ../ &&
+    rm -rf ./abnf-download
+- cargo install mdbook || true
+
+script:
+- make lint
+- mdbook build
+
+deploy:
+  provider: script
+  script: sh ./ci/github-pages.sh
+  skip_cleanup: true
+  on:
+    branch: master
+    repo: squid-lang/spec

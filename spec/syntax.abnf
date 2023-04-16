@@ -1,0 +1,58 @@
+; Defined as per https://tools.ietf.org/pdf/rfc5234.pdf
+; WARNING: This is a work in progress and not yet authoritative.
+
+; Unicode character ranges should be commented to allow easier understanding without
+; the need to look up the ranges.
+; For an overview of unicode ranges see: http://billposer.org/Linguistics/Computation/UnicodeRanges.html
+
+; Note: For the sake of simplicity an <EOF> is treated as a valid line ending.
+
+file = *(block / blank-line)
+
+block = heading / quote / ordered-list / unordered-list / preformatted
+
+blank-line = *WSP line-ending
+
+heading = heading-prefix plaintext line-ending
+heading-prefix = "# " / "## " / "### " / "#### "
+
+quote = 1*(quote-line)
+quote-line = quote-prefix plaintext line-ending
+quote-prefix = "> "
+
+ordered-list = 1*(ordered-list-line)
+ordered-list-line = ordered-list-prefix plaintext line-ending *(list-continuation)
+ordered-list-prefix = ". "
+
+unordered-list = 1*(unordered-list-line)
+unordered-list-line = unordered-list-prefix plaintext line-ending *(list-continuation)
+unordered-list-prefix = "- "
+
+list-continuation = "  " plaintext line-ending
+
+preformatted = [decorator line-ending] separator *(plain-line) separator
+
+decorator = "[" decorator-name [":" *WSP decorator-params] "]" *WSP
+decorator-params = *(decorator-param "," *WSP) decorator-param
+decorator-name = 1*ascii-char
+decorator-param = 1*ascii-char
+
+; A separator is defined as at least 3 dashes (---) in order to prevent conflicts with
+; comments in some languages. (e.g. SQL uses two dashes (--) for comments.)
+separator = 3*(%x2D) line-ending
+plain-line = *(plaintext) line-ending
+
+; Ascii values suffice in certain cases (e.g. decorator names or params)
+; We might need to extend this in the future
+ascii-letter = %x41-5A / %x61-7A
+digit = %x30-39
+ascii-char = ascii-letter / digit / %x5F
+
+; this range includes all valid unicode characters,
+; starting with the first non-control char %x20 up to limit
+plaintext = %x20-10FFFF
+
+; When testing with `abnfgen` enable this line and comment the previous definition
+; plaintext = 10*(ascii-letter)
+
+line-ending = %x0D.0A / %x0A
