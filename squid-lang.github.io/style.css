@@ -1,0 +1,87 @@
+@font-face {
+  font-family: 'Vollkorn';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Vollkorn Regular'),
+       local('Vollkorn-Regular'),
+       url(/fonts/Vollkorn-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Vollkorn';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Vollkorn Bold'),
+       local('Vollkorn-Bold'),
+       url(/fonts/Vollkorn-Bold.woff2) format('woff2');
+}
+
+:root {
+  --brand-purple: #8E24AA;
+  --link-color: var(--brand-purple);
+}
+
+body {
+  font-family: 'Vollkorn', 'Times New Roman', Times, serif;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  font-synthesis: none;
+  margin: 0;
+}
+
+.landing-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 96px 12px 12px 12px;
+}
+
+.landing-page > .title {
+  font-size: 42px;
+  font-weight: bold;
+  text-align: center;
+  margin: 40px 0 24px 0;
+}
+
+.landing-links > .list {
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 42px;
+  padding: 0;
+  margin: 0;
+}
+
+.landing-links > .list > .item > .link {
+  color: var(--link-color);
+  text-decoration: none;
+  transition: opacity .2s;
+}
+
+.landing-links > .list > .item > .link:hover {
+  opacity: .7;
+}
+
+.inline-link {
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+}
+
+.inline-link:hover {
+  text-decoration: underline;
+}
+
+.landing-footer {
+  font-size: 14px;
+  margin-top: 24px;
+  opacity: .4;
+  transition: opacity .2s;
+}
+
+.landing-footer:hover {
+  opacity: 1;
+}
